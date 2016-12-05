@@ -1,24 +1,15 @@
 # AzaleaExample
 
-**TODO: Add description**
+Azalea upload example
 
-## Installation
+## Set the app
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+```elixir
+mix ecto.create
+mix ecto.migrate
+iex -S mix
+```
 
-  1. Add `azalea_example` to your list of dependencies in `mix.exs`:
+## Use azalea as upload
 
-    ```elixir
-    def deps do
-      [{:azalea_example, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `azalea_example` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:azalea_example]]
-    end
-    ```
-
+visit http://localhost:4000

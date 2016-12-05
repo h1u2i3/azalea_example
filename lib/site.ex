@@ -12,7 +12,7 @@ defmodule Site do
   get "/" do
     conn
     |> put_resp_content_type("text/html")
-    |> send_resp(200, Site.View.upload_html("upload"))
+    |> send_resp(200, Site.View.index_html)
   end
 
   get "/ecto" do
@@ -38,6 +38,12 @@ defmodule Site do
     conn
     |> put_resp_content_type("text/html")
     |> send_resp(200, Site.View.upload_response_html(result))
+  end
+
+  get "/upload" do
+    conn
+    |> put_resp_content_type("text/html")
+    |> send_resp(200, Site.View.upload_html("upload"))
   end
 
   post "/upload" do
@@ -71,11 +77,23 @@ defmodule Site.User do
 end
 
 defmodule Site.View do
+  def index_html do
+    """
+    <h1>Azalea Example</h1>
+    <ul>
+      <li><a href="/upload">Check with the normal upload</a></li>
+      <li><a href="/ecto">Upload single file with Ecto</a></li>
+      <li><a href="/ecto_multi">Upload multi-files with Ecto</a></li>
+    </ul>
+    """
+  end
   def upload_html(target) do
     """
     <form action="/#{target}" method="post" enctype="multipart/form-data">
-      <input id="user_photo" name="user[photo]" type="file"><br/>
-      <input type="submit" value="Submit">
+      <ul>
+        <li><input id="user_photo" name="user[photo]" type="file"></li>
+        <li><input type="submit" value="Submit"></li>
+      </ul>
     </form>
     """
   end
@@ -83,9 +101,11 @@ defmodule Site.View do
   def multi_upload_html(target) do
     """
     <form action="/#{target}" method="post" enctype="multipart/form-data">
-      <input id="user_photo" name="user[photo][]" type="file"><br/>
-      <input id="user_photo" name="user[photo][]" type="file"><br/>
-      <input type="submit" value="Submit">
+      <ul>
+        <li><input id="user_photo" name="user[photo][]" type="file"></li>
+        <li><input id="user_photo" name="user[photo][]" type="file"></li>
+        <li><input type="submit" value="Submit"></li>
+      </ul>
     </form>
     """
   end
