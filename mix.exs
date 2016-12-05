@@ -41,7 +41,7 @@ defmodule AzaleaExample.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:plug, "~> 1.0"},
       {:cowboy, "~> 1.0"},
-      {:azalea, path: "../azalea"}
+      {:azalea, github: "h1u2i3/azalea"}
     ]
   end
 end
